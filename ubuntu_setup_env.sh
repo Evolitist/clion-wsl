@@ -13,16 +13,25 @@ sudo apt remove -y --purge openssh-server
 sudo apt install -y openssh-server
 
 # 0.2. install basic dependencies
-sudo apt install -y cmake gcc clang gdb valgrind build-essential
+########
+# Includes ARMEL cross-compilers and sshpass utility
+########
+sudo apt install -y cmake gcc clang gdb valgrind build-essential gcc-arm-linux-gnueabi g++-arm-linux-gnueabi sshpass
 
 # 1.1. configure sshd
 sudo cp $SSHD_FILE ${SSHD_FILE}.`date '+%Y-%m-%d_%H-%M-%S'`.back
 sudo sed -i '/^Port/ d' $SSHD_FILE
-sudo sed -i '/^UsePrivilegeSeparation/ d' $SSHD_FILE
+########
+# Not supported on Ubuntu 18.04
+########
+#sudo sed -i '/^UsePrivilegeSeparation/ d' $SSHD_FILE
 sudo sed -i '/^PasswordAuthentication/ d' $SSHD_FILE
 echo "# configured by CLion"      | sudo tee -a $SSHD_FILE
 echo "Port ${SSHD_PORT}"          | sudo tee -a $SSHD_FILE
-echo "UsePrivilegeSeparation no"  | sudo tee -a $SSHD_FILE
+########
+# Not supported on Ubuntu 18.04
+########
+#echo "UsePrivilegeSeparation no"  | sudo tee -a $SSHD_FILE
 echo "PasswordAuthentication yes" | sudo tee -a $SSHD_FILE
 # 1.2. apply new settings
 sudo service ssh --full-restart
@@ -42,5 +51,8 @@ EOF
 echo 
 echo "SSH server parameters ($SSHD_FILE):"
 echo "Port ${SSHD_PORT}"
-echo "UsePrivilegeSeparation no"
+########
+# Not supported on Ubuntu 18.04
+########
+#echo "UsePrivilegeSeparation no"
 echo "PasswordAuthentication yes"
