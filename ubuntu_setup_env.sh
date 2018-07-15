@@ -16,7 +16,7 @@ sudo apt install -y openssh-server
 ########
 # Includes ARMEL cross-compilers and sshpass utility
 ########
-sudo apt install -y cmake gcc clang gdb valgrind build-essential gcc-arm-linux-gnueabi g++-arm-linux-gnueabi sshpass
+sudo apt install -y cmake gcc clang gdb valgrind build-essential gcc-arm-linux-gnueabi g++-arm-linux-gnueabi sshpass unzip
 
 # 1.1. configure sshd
 sudo cp $SSHD_FILE ${SSHD_FILE}.`date '+%Y-%m-%d_%H-%M-%S'`.back
