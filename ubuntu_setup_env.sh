@@ -41,8 +41,7 @@ sed -i '/^sudo service ssh --full-restart/ d' ~/.bashrc
 # We also need dbus and Avahi
 sed -i '/^sudo /etc/init.d/dbus start/ d' ~/.bashrc
 sed -i '/^sudo /etc/init.d/avahi-daemon start/ d' ~/.bashrc
-# Allow running make as sudo without password prompt
-echo "%sudo ALL=(ALL) NOPASSWD: /usr/sbin/service ssh --full-restart, /usr/bin/make, /etc/init.d/dbus start, /etc/init.d/avahi-daemon start" | sudo tee -a $SUDOERS_FILE
+echo "%sudo ALL=(ALL) NOPASSWD: /usr/sbin/service ssh --full-restart, /etc/init.d/dbus start, /etc/init.d/avahi-daemon start" | sudo tee -a $SUDOERS_FILE
 cat << 'EOF' >> ~/.bashrc
 dbus_status=$(/etc/init.d/dbus status)
 if [[ $dbus_status = *"is not running"* ]]; then
