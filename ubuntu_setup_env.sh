@@ -67,3 +67,7 @@ echo "Port ${SSHD_PORT}"
 ########
 #echo "UsePrivilegeSeparation no"
 echo "PasswordAuthentication yes"
+
+# Set write permissions on headers & library installation paths
+sudo chmod a+w /usr/local/include
+sudo chmod a+w /usr/local/lib
